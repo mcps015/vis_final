@@ -1,0 +1,642 @@
+<!-- Code from d3-graph-gallery.com -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <!-- Load d3.js -->
+    <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=-PM14nzpuICp41rg3Lc7LnKOaa6j0EjS0e-O1k5qwvS1KMkKhib0FWZEzFCpyRq66bqdIrx_qFTGbu-WuoAlDpyheISVGioOLPN3N18R3q_gIacFhqbZRLsj_riTm1vfShMyde6cOgQQwRApLvK0ZCT9VIsJvYwokwdduh1I87g5c2OZ7__L-A1CKrFb5xpMF0Wu6EZyl_FFocnCKITcnyHWvzeWIzEheiTfW-IWDmnxqfPsKDbPRBMAfyrb1hwSLC4bw0IpKXGpbgfQLHV7KXb-PElhwsmaHi7aA4qVoolwG2E3N4f84oTe6fGYygLNhaqLsJKwIvY1RKXcxx122Adg5oQm_v-VF9qmE71Lv4WPi0rxaTzivKNhFce5AwlD92BbjZp19ah4n97uNdCvIcpvv8twkfcIhn8_dvHRyhg" charset="UTF-8"></script><script src="https://d3js.org/d3.v4.js"></script>
+
+
+    <style>
+      .title{
+        width: 700px;
+        height: 30px;
+      }
+
+      .text{
+        position: relative; 
+        text-align: center;
+      }
+
+      .axis path, .axis line{
+        fill: none;
+        stroke: none;
+      }
+
+      .axis text{
+        fill: none;
+      }
+    </style>
+  </head>
+
+  <!-- <body style="overflow-x: hidden;"> -->
+  <body style="overflow-x: hidden; overflow-y: hidden;">
+
+    <div class=title>
+      <h2 class="text">avgSentenceLen_100Terms</h2>
+    </div>
+
+    <!-- Create a div where the graph will take place -->
+    <div id="my_dataviz"></div>
+
+    <svg>
+      <defs>
+        <linearGradient id="gradient"
+        x1="0%" y1="0%"
+        x2="100%" y2="0%"
+        spreadMethod="pad">
+        <stop offset="0%" stop-color="white" stop-opacity="0"/>
+        <stop offset="50%" stop-color="#69b3a2" stop-opacity="1"/>
+        <stop offset="100%" stop-color="#27413B" stop-opacity="1"/>
+        </linearGradient>
+      </defs>
+    </svg>
+
+
+
+    <script>
+
+      // set the dimensions and margins of the graph
+      var margin = {top: 60, right: 30, bottom: 30, left: 30},
+        width = 450 - margin.left - margin.right,
+        height = 450 - margin.top - margin.bottom;
+
+      // append the svg object to the body of the page
+      var svg = d3.select("#my_dataviz")
+      .append("svg")
+        .attr("width", 750 + margin.left + margin.right)
+        .attr("height", 2250 + margin.top + margin.bottom)
+
+
+      var layer1 = svg.append("g")
+        .attr("transform",
+              "translate(" + margin.left + "," + margin.top + ")");
+
+      var layer2 = svg.append("g")
+        .attr("transform",
+              "translate(" + (margin.left+160) + "," + margin.top + ")");
+
+      var layer3 = svg.append("g")
+        .attr("transform",
+              "translate(" + (margin.left+160*2) + "," + margin.top + ")");
+      
+      var layer4 = svg.append("g")
+        .attr("transform",
+              "translate(" + (margin.left+160*3) + "," + margin.top + ")");
+
+      var layer5 = svg.append("g")
+        .attr("transform",
+              "translate(" + margin.left + "," + (margin.top+130) + ")");
+
+      var layer6 = svg.append("g")
+        .attr("transform",
+              "translate(" + (margin.left+160) + "," + (margin.top+130) + ")");
+
+      var layer7 = svg.append("g")
+        .attr("transform",
+              "translate(" + (margin.left+160*2) + "," + (margin.top+130) + ")");
+      
+      var layer8 = svg.append("g")
+        .attr("transform",
+              "translate(" + (margin.left+160*3) + "," + (margin.top+130) + ")");
+
+      var layer9 = svg.append("g")
+        .attr("transform",
+              "translate(" + margin.left + "," + (margin.top+145*2) + ")");
+
+      var layer10 = svg.append("g")
+        .attr("transform",
+              "translate(" + (margin.left+160) + "," + (margin.top+145*2) + ")");
+
+      var layer11 = svg.append("g")
+        .attr("transform",
+              "translate(" + (margin.left+160*2) + "," + (margin.top+145*2) + ")");
+      
+      var layer12 = svg.append("g")
+        .attr("transform",
+              "translate(" + (margin.left+160*3) + "," + (margin.top+145*2) + ")");
+
+      var layer13 = svg.append("g")
+        .attr("transform",
+              "translate(" + margin.left + "," + (margin.top+155*3) + ")");
+
+      var layer14 = svg.append("g")
+        .attr("transform",
+              "translate(" + (margin.left+160) + "," + (margin.top+155*3) + ")");
+
+      var layer15 = svg.append("g")
+        .attr("transform",
+              "translate(" + (margin.left+160*2) + "," + (margin.top+155*3) + ")");
+      
+      var layer16 = svg.append("g")
+        .attr("transform",
+              "translate(" + (margin.left+160*3) + "," + (margin.top+155*3) + ")");
+
+      var layer17 = svg.append("g")
+        .attr("transform",
+              "translate(" + margin.left + "," + (margin.top+155*3) + ")");
+
+      var layer18 = svg.append("g")
+        .attr("transform",
+              "translate(" + (margin.left+160) + "," + (margin.top+155*3) + ")");
+
+      var layer19 = svg.append("g")
+        .attr("transform",
+              "translate(" + (margin.left+160*2) + "," + (margin.top+155*3) + ")");
+      
+      var layer20 = svg.append("g")
+        .attr("transform",
+              "translate(" + (margin.left+160*3) + "," + (margin.top+155*3) + ")");
+
+      var layer21 = svg.append("g")
+        .attr("transform",
+              "translate(" + margin.left + "," + (margin.top+155*4) + ")");
+      
+      var layer22 = svg.append("g")
+        .attr("transform",
+              "translate(" + (margin.left+160) + "," + (margin.top+155*4) + ")");
+
+      // Labels of row and columns
+      var myGroups = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
+      var myVars = ["v1", "v2", "v3", "v4", "v5", "v6", "v7", "v8", "v9", "v10",
+                    "v11", "v12", "v13", "v14", "v15", "v16", "v17", "v18", "v19", "v20",
+                    "v21", "v22", "v23", "v24", "v25", "v26", "v27", "v28", "v29", "v30",
+                    "v31", "v32", "v33", "v34", "v35", "v36", "v37", "v38", "v39", "v40"]
+
+
+      // Build X scales and axis:
+      var x = d3.scaleBand()
+        .range([ 0, width/3 ])
+        .domain(myGroups)
+        .padding(0.01);
+
+      layer1.append("g").attr("class", "axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
+
+      layer2.append("g").attr("class", "axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
+
+      layer3.append("g").attr("class", "axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));  
+
+      layer4.append("g").attr("class", "axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));    
+
+      layer5.append("g").attr("class", "axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
+
+      layer6.append("g").attr("class", "axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
+
+      layer7.append("g").attr("class", "axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));  
+
+      layer8.append("g").attr("class", "axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
+
+      layer9.append("g").attr("class", "axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
+
+      layer10.append("g").attr("class", "axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
+
+      layer11.append("g").attr("class", "axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));  
+
+      layer12.append("g").attr("class", "axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
+
+      layer13.append("g").attr("class", "axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
+
+      layer14.append("g").attr("class", "axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
+
+      layer15.append("g").attr("class", "axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));  
+
+      layer16.append("g").attr("class", "axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
+
+      layer17.append("g").attr("class", "axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
+
+      layer18.append("g").attr("class", "axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
+
+      layer19.append("g").attr("class", "axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));  
+
+      layer20.append("g").attr("class", "axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
+
+      layer21.append("g").attr("class", "axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));  
+
+      layer22.append("g").attr("class", "axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
+
+
+      // Build X scales and axis:
+      var y = d3.scaleBand()
+        .range([ height, 0 ])
+        .domain(myVars)
+        .padding(0.01);
+
+      layer1.append("g").attr("class", "axis")
+        .call(d3.axisLeft(y));
+      
+      layer2.append("g").attr("class", "axis")
+        .call(d3.axisLeft(y));
+      
+      layer3.append("g").attr("class", "axis")
+        .call(d3.axisLeft(y));
+      
+      layer4.append("g").attr("class", "axis")
+        .call(d3.axisLeft(y));
+
+      layer5.append("g").attr("class", "axis")
+        .call(d3.axisLeft(y));
+      
+      layer6.append("g").attr("class", "axis")
+        .call(d3.axisLeft(y));
+      
+      layer7.append("g").attr("class", "axis")
+        .call(d3.axisLeft(y));
+      
+      layer8.append("g").attr("class", "axis")
+        .call(d3.axisLeft(y));
+
+      layer9.append("g").attr("class", "axis")
+        .call(d3.axisLeft(y));
+      
+      layer10.append("g").attr("class", "axis")
+        .call(d3.axisLeft(y));
+      
+      layer11.append("g").attr("class", "axis")
+        .call(d3.axisLeft(y));
+      
+      layer12.append("g").attr("class", "axis")
+        .call(d3.axisLeft(y));
+
+      layer13.append("g").attr("class", "axis")
+        .call(d3.axisLeft(y));
+      
+      layer14.append("g").attr("class", "axis")
+        .call(d3.axisLeft(y));
+      
+      layer15.append("g").attr("class", "axis")
+        .call(d3.axisLeft(y));
+      
+      layer16.append("g").attr("class", "axis")
+        .call(d3.axisLeft(y));
+
+      layer17.append("g").attr("class", "axis")
+        .call(d3.axisLeft(y));
+      
+      layer18.append("g").attr("class", "axis")
+        .call(d3.axisLeft(y));
+      
+      layer19.append("g").attr("class", "axis")
+        .call(d3.axisLeft(y));
+      
+      layer20.append("g").attr("class", "axis")
+        .call(d3.axisLeft(y));
+        
+      layer21.append("g").attr("class", "axis")
+        .call(d3.axisLeft(y));
+      
+      layer22.append("g").attr("class", "axis")
+        .call(d3.axisLeft(y));
+
+      // Build color scale
+      var myColor = d3.scaleLinear()
+        .range(["white", "#69b3a2"]) //FF506D, 69b3a2, FF6232
+        .domain([1,70])
+
+
+      //Read the data
+      //d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/heatmap_data.csv", function(data) {
+      d3.csv('./__avgSentenceLen_100Terms/1.csv', function(data) {
+        layer1.selectAll()
+            .data(data, function(d) {return d.group+':'+d.variable;})
+            .enter()
+            .append("rect")
+            .attr("x", function(d) { return x(d.group) })
+            .attr("y", function(d) { return y(d.variable) })
+            .attr("width", x.bandwidth() )
+            .attr("height", y.bandwidth() )
+            .style("fill", function(d) { return myColor(d.value)} )
+      })
+
+      d3.csv('./__avgSentenceLen_100Terms/2.csv', function(data) {
+        layer2.selectAll()
+            .data(data, function(d) {return d.group+':'+d.variable;})
+            .enter()
+            .append("rect")
+            .attr("x", function(d) { return x(d.group) })
+            .attr("y", function(d) { return y(d.variable) })
+            .attr("width", x.bandwidth() )
+            .attr("height", y.bandwidth() )
+            .style("fill", function(d) { return myColor(d.value)} )
+      })
+
+      d3.csv('./__avgSentenceLen_100Terms/3.csv', function(data) {
+        layer3.selectAll()
+            .data(data, function(d) {return d.group+':'+d.variable;})
+            .enter()
+            .append("rect")
+            .attr("x", function(d) { return x(d.group) })
+            .attr("y", function(d) { return y(d.variable) })
+            .attr("width", x.bandwidth() )
+            .attr("height", y.bandwidth() )
+            .style("fill", function(d) { return myColor(d.value)} )
+      })
+
+      d3.csv('./__avgSentenceLen_100Terms/4.csv', function(data) {
+        layer4.selectAll()
+            .data(data, function(d) {return d.group+':'+d.variable;})
+            .enter()
+            .append("rect")
+            .attr("x", function(d) { return x(d.group) })
+            .attr("y", function(d) { return y(d.variable) })
+            .attr("width", x.bandwidth() )
+            .attr("height", y.bandwidth() )
+            .style("fill", function(d) { return myColor(d.value)} )
+      })
+
+      d3.csv('./__avgSentenceLen_100Terms/5.csv', function(data) {
+        layer5.selectAll()
+            .data(data, function(d) {return d.group+':'+d.variable;})
+            .enter()
+            .append("rect")
+            .attr("x", function(d) { return x(d.group) })
+            .attr("y", function(d) { return y(d.variable) })
+            .attr("width", x.bandwidth() )
+            .attr("height", y.bandwidth() )
+            .style("fill", function(d) { return myColor(d.value)} )
+      })
+
+      d3.csv('./__avgSentenceLen_100Terms/6.csv', function(data) {
+        layer6.selectAll()
+            .data(data, function(d) {return d.group+':'+d.variable;})
+            .enter()
+            .append("rect")
+            .attr("x", function(d) { return x(d.group) })
+            .attr("y", function(d) { return y(d.variable) })
+            .attr("width", x.bandwidth() )
+            .attr("height", y.bandwidth() )
+            .style("fill", function(d) { return myColor(d.value)} )
+      })
+
+      d3.csv('./__avgSentenceLen_100Terms/7.csv', function(data) {
+        layer7.selectAll()
+            .data(data, function(d) {return d.group+':'+d.variable;})
+            .enter()
+            .append("rect")
+            .attr("x", function(d) { return x(d.group) })
+            .attr("y", function(d) { return y(d.variable) })
+            .attr("width", x.bandwidth() )
+            .attr("height", y.bandwidth() )
+            .style("fill", function(d) { return myColor(d.value)} )
+      })
+
+      d3.csv('./__avgSentenceLen_100Terms/8.csv', function(data) {
+        layer8.selectAll()
+            .data(data, function(d) {return d.group+':'+d.variable;})
+            .enter()
+            .append("rect")
+            .attr("x", function(d) { return x(d.group) })
+            .attr("y", function(d) { return y(d.variable) })
+            .attr("width", x.bandwidth() )
+            .attr("height", y.bandwidth() )
+            .style("fill", function(d) { return myColor(d.value)} )
+      })
+
+      d3.csv('./__avgSentenceLen_100Terms/9.csv', function(data) {
+        layer9.selectAll()
+            .data(data, function(d) {return d.group+':'+d.variable;})
+            .enter()
+            .append("rect")
+            .attr("x", function(d) { return x(d.group) })
+            .attr("y", function(d) { return y(d.variable) })
+            .attr("width", x.bandwidth() )
+            .attr("height", y.bandwidth() )
+            .style("fill", function(d) { return myColor(d.value)} )
+      })
+
+      d3.csv('./__avgSentenceLen_100Terms/10.csv', function(data) {
+        layer10.selectAll()
+            .data(data, function(d) {return d.group+':'+d.variable;})
+            .enter()
+            .append("rect")
+            .attr("x", function(d) { return x(d.group) })
+            .attr("y", function(d) { return y(d.variable) })
+            .attr("width", x.bandwidth() )
+            .attr("height", y.bandwidth() )
+            .style("fill", function(d) { return myColor(d.value)} )
+      })
+
+      d3.csv('./__avgSentenceLen_100Terms/11.csv', function(data) {
+        layer11.selectAll()
+            .data(data, function(d) {return d.group+':'+d.variable;})
+            .enter()
+            .append("rect")
+            .attr("x", function(d) { return x(d.group) })
+            .attr("y", function(d) { return y(d.variable) })
+            .attr("width", x.bandwidth() )
+            .attr("height", y.bandwidth() )
+            .style("fill", function(d) { return myColor(d.value)} )
+      })
+
+      d3.csv('./__avgSentenceLen_100Terms/12.csv', function(data) {
+        layer12.selectAll()
+            .data(data, function(d) {return d.group+':'+d.variable;})
+            .enter()
+            .append("rect")
+            .attr("x", function(d) { return x(d.group) })
+            .attr("y", function(d) { return y(d.variable) })
+            .attr("width", x.bandwidth() )
+            .attr("height", y.bandwidth() )
+            .style("fill", function(d) { return myColor(d.value)} )
+      })
+
+      d3.csv('./__avgSentenceLen_100Terms/13.csv', function(data) {
+        layer13.selectAll()
+            .data(data, function(d) {return d.group+':'+d.variable;})
+            .enter()
+            .append("rect")
+            .attr("x", function(d) { return x(d.group) })
+            .attr("y", function(d) { return y(d.variable) })
+            .attr("width", x.bandwidth() )
+            .attr("height", y.bandwidth() )
+            .style("fill", function(d) { return myColor(d.value)} )
+      })
+
+      d3.csv('./__avgSentenceLen_100Terms/14.csv', function(data) {
+        layer14.selectAll()
+            .data(data, function(d) {return d.group+':'+d.variable;})
+            .enter()
+            .append("rect")
+            .attr("x", function(d) { return x(d.group) })
+            .attr("y", function(d) { return y(d.variable) })
+            .attr("width", x.bandwidth() )
+            .attr("height", y.bandwidth() )
+            .style("fill", function(d) { return myColor(d.value)} )
+      })
+
+      d3.csv('./__avgSentenceLen_100Terms/15.csv', function(data) {
+        layer15.selectAll()
+            .data(data, function(d) {return d.group+':'+d.variable;})
+            .enter()
+            .append("rect")
+            .attr("x", function(d) { return x(d.group) })
+            .attr("y", function(d) { return y(d.variable) })
+            .attr("width", x.bandwidth() )
+            .attr("height", y.bandwidth() )
+            .style("fill", function(d) { return myColor(d.value)} )
+      })
+
+      d3.csv('./__avgSentenceLen_100Terms/16.csv', function(data) {
+        layer16.selectAll()
+            .data(data, function(d) {return d.group+':'+d.variable;})
+            .enter()
+            .append("rect")
+            .attr("x", function(d) { return x(d.group) })
+            .attr("y", function(d) { return y(d.variable) })
+            .attr("width", x.bandwidth() )
+            .attr("height", y.bandwidth() )
+            .style("fill", function(d) { return myColor(d.value)} )
+      })
+
+      d3.csv('./__avgSentenceLen_100Terms/17.csv', function(data) {
+        layer17.selectAll()
+            .data(data, function(d) {return d.group+':'+d.variable;})
+            .enter()
+            .append("rect")
+            .attr("x", function(d) { return x(d.group) })
+            .attr("y", function(d) { return y(d.variable) })
+            .attr("width", x.bandwidth() )
+            .attr("height", y.bandwidth() )
+            .style("fill", function(d) { return myColor(d.value)} )
+      })
+
+      d3.csv('./__avgSentenceLen_100Terms/18.csv', function(data) {
+        layer18.selectAll()
+            .data(data, function(d) {return d.group+':'+d.variable;})
+            .enter()
+            .append("rect")
+            .attr("x", function(d) { return x(d.group) })
+            .attr("y", function(d) { return y(d.variable) })
+            .attr("width", x.bandwidth() )
+            .attr("height", y.bandwidth() )
+            .style("fill", function(d) { return myColor(d.value)} )
+      })
+
+      d3.csv('./__avgSentenceLen_100Terms/19.csv', function(data) {
+        layer19.selectAll()
+            .data(data, function(d) {return d.group+':'+d.variable;})
+            .enter()
+            .append("rect")
+            .attr("x", function(d) { return x(d.group) })
+            .attr("y", function(d) { return y(d.variable) })
+            .attr("width", x.bandwidth() )
+            .attr("height", y.bandwidth() )
+            .style("fill", function(d) { return myColor(d.value)} )
+      })
+
+      d3.csv('./__avgSentenceLen_100Terms/20.csv', function(data) {
+        layer20.selectAll()
+            .data(data, function(d) {return d.group+':'+d.variable;})
+            .enter()
+            .append("rect")
+            .attr("x", function(d) { return x(d.group) })
+            .attr("y", function(d) { return y(d.variable) })
+            .attr("width", x.bandwidth() )
+            .attr("height", y.bandwidth() )
+            .style("fill", function(d) { return myColor(d.value)} )
+      })
+
+      d3.csv('./__avgSentenceLen_100Terms/21.csv', function(data) {
+        layer21.selectAll()
+            .data(data, function(d) {return d.group+':'+d.variable;})
+            .enter()
+            .append("rect")
+            .attr("x", function(d) { return x(d.group) })
+            .attr("y", function(d) { return y(d.variable) })
+            .attr("width", x.bandwidth() )
+            .attr("height", y.bandwidth() )
+            .style("fill", function(d) { return myColor(d.value)} )
+      })
+
+      d3.csv('./__avgSentenceLen_100Terms/22.csv', function(data) {
+        layer22.selectAll()
+            .data(data, function(d) {return d.group+':'+d.variable;})
+            .enter()
+            .append("rect")
+            .attr("x", function(d) { return x(d.group) })
+            .attr("y", function(d) { return y(d.variable) })
+            .attr("width", x.bandwidth() )
+            .attr("height", y.bandwidth() )
+            .style("fill", function(d) { return myColor(d.value)} )
+      })
+
+
+      color_screen = svg.append('g')
+                .append('rect')
+                .attr('width', 200)
+                .attr('height', 15)
+                .style('fill', 'url(#gradient)')
+                .style('stroke', 'none')
+                .attr("transform",
+                      "translate(" + (margin.left+220) + "," + (margin.top-50) + ")");
+      
+      color_text1 = svg.append('g')
+              .append('text')
+              .style('font-size', '20px')
+              .style('fill', '#375E55')
+              .style('font-weight', 'bold')
+              .text('0')
+              .attr("transform",
+                      "translate(" + (margin.left+220) + "," + (margin.top-38) + ")");
+
+        color_text2 = svg.append('g')              
+              .append('text')
+              .style('font-size', '20px')
+              .style('fill', '#375E55')
+              .style('font-weight', 'bold')
+              .text('70')
+              .attr("transform",
+                      "translate(" + (margin.left+425) + "," + (margin.top-38) + ")");
+
+
+
+
+    </script>
+  </body>
+</html>
+
+
